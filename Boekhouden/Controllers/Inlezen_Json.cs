@@ -48,16 +48,19 @@ namespace Boekhouden
                     Console.WriteLine("=======================");
 
 
-                          var prijsTotal = invoice.TransactionRows.Sum(tr => tr.Price);
+                    var prijsTotal = invoice.TransactionRows.Sum(tr => tr.Price);
                     var transactionRowDiscountToale = invoice.TransactionRows.Sum(tr => tr.TransactionRowDiscount);
                     var prijsMinDiscount = invoice.TransactionRows.Sum(tr => tr.Price - tr.TransactionRowDiscount);
                     var differenceSubTotal = invoice.SubTotal - prijsMinDiscount;
+
 
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("SubTotal: " + (prijsTotal - transactionRowDiscountToale));
                     Console.WriteLine("Total(Min Discount): " + (prijsMinDiscount - invoice.CustomerDiscount.DiscountAmount));
                     Console.WriteLine("Difference: " + differenceSubTotal);
                     Console.WriteLine("=======================");
+
+
 
 
                     foreach (var row in invoice.TransactionRows)
@@ -69,16 +72,29 @@ namespace Boekhouden
                         Console.WriteLine("VatAmount: " + row.VatAmount);
                         Console.WriteLine("TransactionRowDiscount: " + row.TransactionRowDiscount);
                         Console.WriteLine("=======================");
+
+                        var invoice1 = new Invoice();
+                        invoice1.TableNumber = invoice.TableNumber;
+                        invoice1.SubTotal = invoice.SubTotal;
+                        invoice1.Total = invoice.Total;
+                        invoice1.CustomerDiscount = invoice.CustomerDiscount;
+                        invoice1.OrderDateTime = invoice.OrderDateTime;
+                        _context.Add(invoice1);
+                        _context.SaveChanges();
+
+                        var transactionRow1 = new TransactionRow();
+                        transactionRow1.ProductDescription = row.ProductDescription;
+                        transactionRow1.Price = row.Price;
+                        transactionRow1.TransactionRowDiscount = row.TransactionRowDiscount;
+                        transactionRow1.VatType = row.VatType;
+                        transactionRow1.VatAmount = row.VatAmount;
+                        invoice1.TransactionRows = new List<TransactionRow>() { transactionRow1 };  
+                        _context.Add(transactionRow1);
+                        _context.SaveChanges();
                     }
 
-                    var invoice1 = new Invoice();
-                    invoice1.TableNumber = invoice.TableNumber;
-                    invoice1.SubTotal = invoice.SubTotal;
-                    invoice1.Total = invoice.Total;
-                    invoice1.CustomerDiscount = invoice.CustomerDiscount;
-                    invoice1.OrderDateTime = invoice.OrderDateTime;
-                    _context.Add(invoice1);
-                    _context.SaveChanges();
+
+
 
 
                 }

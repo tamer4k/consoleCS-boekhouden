@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Boekhouden
@@ -12,5 +13,10 @@ namespace Boekhouden
         public double TransactionRowDiscount { get; set; }
         public int VatType { get; set; }
         public double VatAmount { get; set; }
+
+        //public int InvoiceID { get; set; }
+        //[ForeignKey("InvoiceID")]
+        //public Invoice Invoice { get; set;}
+
     }
 }
