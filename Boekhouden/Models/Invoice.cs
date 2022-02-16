@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Boekhouden
 {
-    internal class Root
+    internal class Invoice
     {
+        public int ID { get; set; }
         public List<TransactionRow> TransactionRows { get; set; }
         public string OrderDateTime { get; set; }
         public string TableNumber { get; set; }
