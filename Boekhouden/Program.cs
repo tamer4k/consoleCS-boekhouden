@@ -15,6 +15,7 @@ namespace Boekhouden
             Inlezen_Json J = new Inlezen_Json();
             J.InLezen();
             Console.ReadKey();
+
         }     
     }
 }

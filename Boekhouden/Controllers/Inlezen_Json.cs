@@ -61,8 +61,13 @@ namespace Boekhouden
                     Console.WriteLine("=======================");
 
 
-
-
+                    var invoice1 = new Invoice();
+                    invoice1.TableNumber = invoice.TableNumber;
+                    invoice1.SubTotal = invoice.SubTotal;
+                    invoice1.Total = invoice.Total;
+                    invoice1.CustomerDiscount = invoice.CustomerDiscount;
+                    invoice1.OrderDateTime = invoice.OrderDateTime;
+                    invoice1.TransactionRows = new List<TransactionRow>();
                     foreach (var row in invoice.TransactionRows)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -73,14 +78,7 @@ namespace Boekhouden
                         Console.WriteLine("TransactionRowDiscount: " + row.TransactionRowDiscount);
                         Console.WriteLine("=======================");
 
-                        var invoice1 = new Invoice();
-                        invoice1.TableNumber = invoice.TableNumber;
-                        invoice1.SubTotal = invoice.SubTotal;
-                        invoice1.Total = invoice.Total;
-                        invoice1.CustomerDiscount = invoice.CustomerDiscount;
-                        invoice1.OrderDateTime = invoice.OrderDateTime;
-                        _context.Add(invoice1);
-                        _context.SaveChanges();
+
 
                         var transactionRow1 = new TransactionRow();
                         transactionRow1.ProductDescription = row.ProductDescription;
@@ -88,12 +86,14 @@ namespace Boekhouden
                         transactionRow1.TransactionRowDiscount = row.TransactionRowDiscount;
                         transactionRow1.VatType = row.VatType;
                         transactionRow1.VatAmount = row.VatAmount;
-                        invoice1.TransactionRows = new List<TransactionRow>() { transactionRow1 };  
-                        _context.Add(transactionRow1);
-                        _context.SaveChanges();
+                        //_context.Add(transactionRow1);
+                        //_context.SaveChanges();
+                        invoice1.TransactionRows.Add(transactionRow1);
+
                     }
 
-
+                    _context.Add(invoice1);
+                    _context.SaveChanges();
 
 
 
