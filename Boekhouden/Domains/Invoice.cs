@@ -8,10 +8,11 @@ namespace Boekhouden
     {
         public int ID { get; set; }
         public List<TransactionRow> TransactionRows { get; set; }
-        public string OrderDateTime { get; set; }
+        public DateTime OrderDateTime { get; set; }
         public string TableNumber { get; set; }
         public double SubTotal { get; set; }
         public CustomerDiscount CustomerDiscount { get; set; }
         public double Total { get; set; }
+        public DateTime DateCreated { get; set; }   
     }
 }

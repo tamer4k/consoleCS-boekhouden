@@ -47,8 +47,11 @@ namespace Boekhouden.Migrations
                     b.Property<int?>("CustomerDiscountID")
                         .HasColumnType("int");
 
-                    b.Property<string>("OrderDateTime")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OrderDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("SubTotal")
                         .HasColumnType("float");

@@ -14,7 +14,7 @@ namespace Boekhouden
 
         public Inlezen_Json()
         {
-            _context  = new ApplicationDbContext();
+            _context = new ApplicationDbContext();
         }
         static List<Invoice> RootObject()
         {
@@ -31,9 +31,12 @@ namespace Boekhouden
                 return null;
             }
         }
+
         public void InLezen()
         {
             var invoices = RootObject();
+
+
             if (invoices != null)
             {
                 foreach (var invoice in invoices)
@@ -44,7 +47,7 @@ namespace Boekhouden
                     Console.WriteLine("CustomerDiscount: " + invoice.CustomerDiscount.DiscountAmount);
                     var totaal = invoice.SubTotal - invoice.CustomerDiscount.DiscountAmount;
                     Console.WriteLine("Total: " + totaal);
-                    Console.WriteLine("OrderDateTime: " + invoice.OrderDateTime);
+                    Console.WriteLine("OrderDateTime: " + invoice.OrderDateTime.ToString("dd/MMMM/yyyy"));
                     Console.WriteLine("=======================");
 
 
@@ -66,7 +69,9 @@ namespace Boekhouden
                     invoice1.SubTotal = invoice.SubTotal;
                     invoice1.Total = invoice.Total;
                     invoice1.CustomerDiscount = invoice.CustomerDiscount;
+                    //string ites = invoice.OrderDateTime.ToString("yyyy/MM/dd");
                     invoice1.OrderDateTime = invoice.OrderDateTime;
+                    invoice1.DateCreated = DateTime.Now;
                     invoice1.TransactionRows = new List<TransactionRow>();
                     foreach (var row in invoice.TransactionRows)
                     {
@@ -86,16 +91,23 @@ namespace Boekhouden
                         transactionRow1.TransactionRowDiscount = row.TransactionRowDiscount;
                         transactionRow1.VatType = row.VatType;
                         transactionRow1.VatAmount = row.VatAmount;
-                        //_context.Add(transactionRow1);
-                        //_context.SaveChanges();
                         invoice1.TransactionRows.Add(transactionRow1);
 
                     }
+                    var isInvoice1AlreadyExists = _context.Invoice.Any(m => m.OrderDateTime == invoice.OrderDateTime);
+                    if (isInvoice1AlreadyExists)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine("opslaan is niet gelukt :( \ninvoice bestaat al");
 
-                    _context.Add(invoice1);
-                    _context.SaveChanges();
-
-
+                    }
+                    else
+                    {
+                        _context.Add(invoice1);
+                        _context.SaveChanges();
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("opslaan is gelukt :)");
+                    }
 
                 }
             }

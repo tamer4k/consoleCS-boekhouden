@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Boekhouden.Migrations
 {
-    public partial class one : Migration
+    public partial class check : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,11 +27,12 @@ namespace Boekhouden.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderDateTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrderDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TableNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubTotal = table.Column<double>(type: "float", nullable: false),
                     CustomerDiscountID = table.Column<int>(type: "int", nullable: true),
-                    Total = table.Column<double>(type: "float", nullable: false)
+                    Total = table.Column<double>(type: "float", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
