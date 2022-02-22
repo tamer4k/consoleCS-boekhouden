@@ -12,10 +12,13 @@ namespace Boekhouden
     {
         static void Main(string[] args)
         {
-            Inlezen_Json J = new Inlezen_Json();
-            J.InLezen();
-            Console.ReadKey();
+            Inlezen_Json j = new Inlezen_Json();
+            j.InLezen();
 
-        }     
+
+            Console.WriteLine("Press <Enter> to exit... ");
+            while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+
+        }
     }
 }

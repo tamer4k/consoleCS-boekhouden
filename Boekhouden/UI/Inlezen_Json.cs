@@ -41,25 +41,66 @@ namespace Boekhouden
             {
                 foreach (var invoice in invoices)
                 {
+                    // Json file uitprinten
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.WriteLine("TableNumber: " + invoice.TableNumber + " ");
                     Console.WriteLine("SubTotal: " + invoice.SubTotal);
                     Console.WriteLine("CustomerDiscount: " + invoice.CustomerDiscount.DiscountAmount);
-                    var totaal = invoice.SubTotal - invoice.CustomerDiscount.DiscountAmount;
-                    Console.WriteLine("Total: " + totaal);
-                    Console.WriteLine("OrderDateTime: " + invoice.OrderDateTime.ToString("dd/MMMM/yyyy"));
+                    Console.WriteLine("Total: " + invoice.Total);
+                    Console.WriteLine("OrderDateTime: " + invoice.OrderDateTime.ToString("dd/MM/yyyy"));
                     Console.WriteLine("=======================");
 
+                    // Json file berekenen
+                    double subTotalNoVat = 0; // vatType 0 btw is 0%
+                    double subTotalInclLowVat = 0; // vatType 1 btw 9%
+                    double subTotalInclHighVat = 0; // vatType 2 btw 21%
+                    double subTotalVat = 0;
+                    foreach (var row in invoice.TransactionRows)
+                    {
+                        var subTotaal = row.Price - row.TransactionRowDiscount; // totaal prijzen min totaal regels discount
+                        var vatType = row.VatType;
+                        switch (vatType)
+                        {
+                                case 0:
+                                subTotalNoVat += subTotaal;
+                                break;
+                                case 1:
+                                subTotalInclLowVat += subTotaal;
+                                break;
+                                case 2:
+                                subTotalInclHighVat += subTotaal;
+                                break;
+                        }
+                    }
 
-                    var prijsTotal = invoice.TransactionRows.Sum(tr => tr.Price);
-                    var transactionRowDiscountToale = invoice.TransactionRows.Sum(tr => tr.TransactionRowDiscount);
-                    var prijsMinDiscount = invoice.TransactionRows.Sum(tr => tr.Price - tr.TransactionRowDiscount);
-                    var differenceSubTotal = invoice.SubTotal - prijsMinDiscount;
+                    var subTotalExclLowVat = Math.Round(subTotalInclLowVat / 1.09,2);
+                    var subTotalExclHighVat = Math.Round(subTotalInclHighVat / 1.21,2);
+                    var totalVatLow = Math.Round(subTotalInclLowVat - subTotalExclLowVat,2);
+                    var totalVatHigh = Math.Round(subTotalInclHighVat - subTotalExclHighVat,2);
 
 
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("SubTotal: " + (prijsTotal - transactionRowDiscountToale));
-                    Console.WriteLine("Total(Min Discount): " + (prijsMinDiscount - invoice.CustomerDiscount.DiscountAmount));
+
+                    var prijsTotal = invoice.TransactionRows.Sum(tr => tr.Price); // totaal prijzen
+                    var transactionRowDiscountToale = invoice.TransactionRows.Sum(tr => tr.TransactionRowDiscount); // totaal regels discount
+                    var customerPercentage = invoice.CustomerDiscount.Percentage; 
+                    var orderDateTime = invoice.OrderDateTime.ToString("dd/MM/yyyy");  
+                    var subTotal = Math.Round(subTotalExclLowVat + subTotalExclHighVat + totalVatLow + totalVatHigh,2); // totaal prijzen min totaal regels discount
+                    var totalVatAmount = Math.Round(totalVatLow + totalVatHigh,2);
+                    var customerDiscountAmount = Math.Round(subTotal / 100 * customerPercentage , 2); // customer discount is subtotal keer precentage
+                    var total = subTotal - customerDiscountAmount;  //var totaal = SubTotal - CustomerDiscountAmount;
+                    var differenceSubTotal = invoice.SubTotal - subTotal;
+                   
+
+
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.WriteLine("SubTotal incl btw: " + subTotal);
+                    Console.WriteLine("SubTotal excl btw: " + (subTotal - totalVatAmount));
+                    Console.WriteLine("TotalVatAmount " + totalVatAmount);
+                    Console.WriteLine("VatAmount 9% : " + totalVatLow);
+                    Console.WriteLine("VatAmount 21% : " + totalVatHigh);
+                    Console.WriteLine("CustomerDiscount: " + customerDiscountAmount);
+                    Console.WriteLine("Total(Min CustomerDiscount): " + (subTotal - customerDiscountAmount));
+                    Console.WriteLine("OrderDateTime: " + orderDateTime);
                     Console.WriteLine("Difference: " + differenceSubTotal);
                     Console.WriteLine("=======================");
 
@@ -75,16 +116,6 @@ namespace Boekhouden
                     invoice1.TransactionRows = new List<TransactionRow>();
                     foreach (var row in invoice.TransactionRows)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("ProductDescription: " + row.ProductDescription);
-                        Console.WriteLine("Price: " + row.Price);
-                        Console.WriteLine("VatType: " + row.VatType);
-                        Console.WriteLine("VatAmount: " + row.VatAmount);
-                        Console.WriteLine("TransactionRowDiscount: " + row.TransactionRowDiscount);
-                        Console.WriteLine("=======================");
-
-
-
                         var transactionRow1 = new TransactionRow();
                         transactionRow1.ProductDescription = row.ProductDescription;
                         transactionRow1.Price = row.Price;
@@ -97,7 +128,7 @@ namespace Boekhouden
                     var isInvoice1AlreadyExists = _context.Invoice.Any(m => m.OrderDateTime == invoice.OrderDateTime);
                     if (isInvoice1AlreadyExists)
                     {
-                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("opslaan is niet gelukt :( \ninvoice bestaat al");
 
                     }
@@ -113,8 +144,16 @@ namespace Boekhouden
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Er is geen Item");
             }
         }
+
+        public void berekenen()
+        {
+
+        }
     }
 }
+
+
