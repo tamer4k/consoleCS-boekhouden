@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boekhouden.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220221142651_check")]
-    partial class check
+    [Migration("20220301122442_boek")]
+    partial class boek
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

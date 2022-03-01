@@ -16,7 +16,7 @@ namespace Boekhouden.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Boekhouden;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=BoekhoudenDB;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
     }
 }

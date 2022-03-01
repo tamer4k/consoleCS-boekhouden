@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Boekhouden.Migrations
 {
-    public partial class check : Migration
+    public partial class boek : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

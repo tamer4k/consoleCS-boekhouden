@@ -14,9 +14,5 @@ namespace Boekhouden
         public int VatType { get; set; }
         public double VatAmount { get; set; }
 
-        //public int InvoiceID { get; set; }
-        //[ForeignKey("InvoiceID")]
-        //public Invoice Invoice { get; set;}
-
     }
 }

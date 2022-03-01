@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boekhouden", "Boekhouden\Boekhouden.csproj", "{52865FF0-8D09-4AFC-9EF3-57F5CF63B854}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{1524A243-51EB-415E-87A4-D63E436FF477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{1524A243-51EB-415E-87A4-D63E436FF477}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boekhouden.test", "Boekhouden.test\Boekhouden.test.csproj", "{0BD75802-F196-429C-96E7-70B46CA17ABB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1524A243-51EB-415E-87A4-D63E436FF477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1524A243-51EB-415E-87A4-D63E436FF477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1524A243-51EB-415E-87A4-D63E436FF477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BD75802-F196-429C-96E7-70B46CA17ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BD75802-F196-429C-96E7-70B46CA17ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BD75802-F196-429C-96E7-70B46CA17ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BD75802-F196-429C-96E7-70B46CA17ABB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

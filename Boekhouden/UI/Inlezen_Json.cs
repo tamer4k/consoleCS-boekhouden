@@ -39,20 +39,21 @@ namespace Boekhouden
             {
                 foreach (var invoice in invoices)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     var table = new ConsoleTable("TableNumber", "SubTotal", "CustomerDiscount", "Total", "OrderDateTime");
                     table.AddRow(invoice.TableNumber, invoice.SubTotal, invoice.CustomerDiscount.DiscountAmount, invoice.Total, invoice.OrderDateTime.ToString("dd/MM/yyyy"));
                     table.Write();
                     Console.WriteLine();
 
-                    // Json file uitprinten
+                    //Json file uitprinten
+
                     //Console.ForegroundColor = ConsoleColor.DarkYellow;
                     //Console.WriteLine("TableNumber: " + invoice.TableNumber + " ");
                     //Console.WriteLine("SubTotal: " + invoice.SubTotal);
                     //Console.WriteLine("CustomerDiscount: " + invoice.CustomerDiscount.DiscountAmount);
                     //Console.WriteLine("Total: " + invoice.Total);
                     //Console.WriteLine("OrderDateTime: " + invoice.OrderDateTime.ToString("dd/MM/yyyy"));
-                    Console.WriteLine("=======================");
+                    //Console.WriteLine("=======================");
 
                     var invoice1 = new Invoice();
                     invoice1.TableNumber = invoice.TableNumber;
@@ -105,7 +106,6 @@ namespace Boekhouden
                             }
                             else if (letter == "n")
                             {
-                                Console.WriteLine("oke we gaan door druk Enter");
                                 gelukt = true;
                             }
                             else
