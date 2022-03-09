@@ -50,47 +50,94 @@
     "TransactionRows": [
       {
         "ProductDescription": "Verpakking",
-        "Price": 3.0,
+        "Price": 1.0,
         "TransactionRowDiscount": 0,
-        "VatType": 2,
+        "VatType": 1,
         "VatAmount": 0.17
       },
       {
         "ProductDescription": "Croissant met jam",
-        "Price": 5.5,
+        "Price": 2.5,
         "TransactionRowDiscount": 0,
         "VatType": 1,
         "VatAmount": 0.21
       },
       {
         "ProductDescription": "Vegan roerei toast",
-        "Price": 10.5,
+        "Price": 8.5,
         "TransactionRowDiscount": 0,
         "VatType": 1,
         "VatAmount": 0.70
       },
       {
         "ProductDescription": "Americano koffie",
-        "Price": 3.5,
+        "Price": 2.5,
         "TransactionRowDiscount": 0,
         "VatType": 1,
         "VatAmount": 0.21
       },
       {
         "ProductDescription": "Verse muntthee",
-        "Price": 5.0,
+        "Price": 3.0,
         "TransactionRowDiscount": 1.0,
         "VatType": 1,
         "VatAmount": 0.17
       }
     ],
-    "OrderDateTime": "2021-03-07T15:50+00",
-    "TableNumber": "9",
-    "SubTotal": 13.50,
+    "OrderDateTime": "2021-02-07T15:50+00",
+    "TableNumber": "36",
+    "SubTotal": 16.50,
     "CustomerDiscount": {
-      "Percentage": 50,
-      "DiscountAmount": 6.55
+      "Percentage": 10,
+      "DiscountAmount": 1.65
     },
-    "Total": 18.85
+    "Total": 14.85
+  },
+  {
+    "TransactionRows": [
+      {
+        "ProductDescription": "Verpakking",
+        "Price": 1.0,
+        "TransactionRowDiscount": 0,
+        "VatType": 1,
+        "VatAmount": 0.17
+      },
+      {
+        "ProductDescription": "Croissant met jam",
+        "Price": 2.5,
+        "TransactionRowDiscount": 0,
+        "VatType": 1,
+        "VatAmount": 0.21
+      },
+      {
+        "ProductDescription": "Vegan roerei toast",
+        "Price": 8.5,
+        "TransactionRowDiscount": 0,
+        "VatType": 1,
+        "VatAmount": 0.70
+      },
+      {
+        "ProductDescription": "Americano koffie",
+        "Price": 2.5,
+        "TransactionRowDiscount": 0,
+        "VatType": 1,
+        "VatAmount": 0.21
+      },
+      {
+        "ProductDescription": "Verse muntthee",
+        "Price": 3.0,
+        "TransactionRowDiscount": 1.0,
+        "VatType": 1,
+        "VatAmount": 0.17
+      }
+    ],
+    "OrderDateTime": "2021-02-07T15:50+00",
+    "TableNumber": "36",
+    "SubTotal": 16.50,
+    "CustomerDiscount": {
+      "Percentage": 10,
+      "DiscountAmount": 1.65
+    },
+    "Total": 14.85
   }
 ]

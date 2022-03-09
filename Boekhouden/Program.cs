@@ -10,20 +10,26 @@ using System.Text;
 
 namespace Boekhouden
 {
+ 
+
     internal class Program
     {
         private static void Main(string[] args)
         {
-            var inlezen = new Inlezen_Json();
-            var berekenen = new Berekenen();
+            var inputJson = @"C:\Users\talashraf\OneDrive - SnelStart Software B.V\Bureaublad\C#\Boekhouden\Boekhouden\json\inputData.json";
+            var outputJson = @"C:\Users\talashraf\OneDrive - SnelStart Software B.V\Bureaublad\C#\Boekhouden\Boekhouden\Json\output.json";
+            var outputUI = new OutputUI();
+            outputUI.Output(inputJson, outputJson);
 
-            inlezen.InLezen();
-            berekenen.berekenen();
+
+            //var inlezen = new Inlezen_Json();
+            //inlezen.InLezen();
 
             Console.WriteLine("Press <Enter> to exit... ");
             while (Console.ReadKey().Key != ConsoleKey.Enter)
             {
             }
+
         }
     }
 }

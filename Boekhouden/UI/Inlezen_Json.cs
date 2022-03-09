@@ -1,4 +1,5 @@
 ﻿using Boekhouden.Data;
+using Boekhouden.UI;
 using ConsoleTables;
 using Newtonsoft.Json;
 using System;
@@ -92,7 +93,7 @@ namespace Boekhouden
                                 if (isInvoice1AlreadyExists)
                                 {
                                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("opslaan is niet gelukt :( \ninvoice bestaat al");
+                                    Console.WriteLine("opslaan is niet gelukt :(  invoice bestaat al");
 
                                 }
                                 else
