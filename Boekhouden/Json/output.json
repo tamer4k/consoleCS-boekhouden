@@ -2,63 +2,63 @@
   {
     "GeldOntvangen": {
       "Debet": 14.85,
-      "Datum": "7-1-2021",
+      "Datum": "7-3-2021",
       "GrootboekRekening": 1300,
       "Grootboek": "Geld ontvangen"
     },
     "OmzetBtwLaag": {
       "Credit": 12.8,
-      "Datum": "7-1-2021",
+      "Datum": "7-3-2021",
       "GrootboekRekening": 8210,
       "Grootboek": "Omzet Laag (diensten)"
     },
     "OmzetBtwHoog": {
       "Credit": 0.74,
-      "Datum": "7-1-2021",
+      "Datum": "7-3-2021",
       "GrootboekRekening": 8200,
       "Grootboek": "Omzet Hoog (diensten)"
     },
     "BtwLaag": {
       "Credit": 1.15,
-      "Datum": "7-1-2021",
+      "Datum": "7-3-2021",
       "GrootboekRekening": 1670,
       "Grootboek": "Btw Laag"
     },
     "BtwHoog": {
       "Credit": 0.16,
-      "Datum": "7-1-2021",
+      "Datum": "7-3-2021",
       "GrootboekRekening": 1671,
       "Grootboek": "Btw Hoog"
     }
   },
   {
     "GeldOntvangen": {
-      "Debet": 14.85,
-      "Datum": "7-2-2021",
+      "Debet": 29.7,
+      "Datum": "7-1-2021",
       "GrootboekRekening": 1300,
       "Grootboek": "Geld ontvangen"
     },
     "OmzetBtwLaag": {
-      "Credit": 13.62,
-      "Datum": "7-2-2021",
+      "Credit": 25.6,
+      "Datum": "7-1-2021",
       "GrootboekRekening": 8210,
       "Grootboek": "Omzet Laag (diensten)"
     },
     "OmzetBtwHoog": {
-      "Credit": 0,
-      "Datum": "7-2-2021",
+      "Credit": 1.48,
+      "Datum": "7-1-2021",
       "GrootboekRekening": 8200,
       "Grootboek": "Omzet Hoog (diensten)"
     },
     "BtwLaag": {
-      "Credit": 1.23,
-      "Datum": "7-2-2021",
+      "Credit": 2.3,
+      "Datum": "7-1-2021",
       "GrootboekRekening": 1670,
       "Grootboek": "Btw Laag"
     },
     "BtwHoog": {
-      "Credit": 0,
-      "Datum": "7-2-2021",
+      "Credit": 0.32,
+      "Datum": "7-1-2021",
       "GrootboekRekening": 1671,
       "Grootboek": "Btw Hoog"
     }

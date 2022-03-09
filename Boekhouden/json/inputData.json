@@ -52,7 +52,7 @@
         "ProductDescription": "Verpakking",
         "Price": 1.0,
         "TransactionRowDiscount": 0,
-        "VatType": 1,
+        "VatType": 2,
         "VatAmount": 0.17
       },
       {
@@ -84,7 +84,7 @@
         "VatAmount": 0.17
       }
     ],
-    "OrderDateTime": "2021-02-07T15:50+00",
+    "OrderDateTime": "2021-01-07T15:50+00",
     "TableNumber": "36",
     "SubTotal": 16.50,
     "CustomerDiscount": {
@@ -99,7 +99,7 @@
         "ProductDescription": "Verpakking",
         "Price": 1.0,
         "TransactionRowDiscount": 0,
-        "VatType": 1,
+        "VatType": 2,
         "VatAmount": 0.17
       },
       {
@@ -131,7 +131,7 @@
         "VatAmount": 0.17
       }
     ],
-    "OrderDateTime": "2021-02-07T15:50+00",
+    "OrderDateTime": "2021-03-07T15:50+00",
     "TableNumber": "36",
     "SubTotal": 16.50,
     "CustomerDiscount": {

@@ -11,6 +11,10 @@ namespace Boekhouden.Domains.DTO
         {
             this.Credit = credit;
         }
+        public CreditRegel()
+        {
+
+        }
         public void Prints()
         {
             Console.WriteLine(" Credit : {0} \n Datum : {1} \n GrootboekRekening : {2} \n Grootboek : {3} \n \n \n", Credit, Datum, GrootboekRekening, Grootboek);
