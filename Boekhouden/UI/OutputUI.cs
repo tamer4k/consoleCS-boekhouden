@@ -101,9 +101,11 @@ namespace Boekhouden.UI
                 }
             }
             double customerPercentage = invoice.CustomerDiscount.Percentage;
+            double subtotalNotVatMintPersentage = subTotalNoVat - Math.Round(subTotalNoVat / 100 * customerPercentage, 2);
             double subtotaVatLowAmountlMinPercentage = subTotalInclLowVat - Math.Round(subTotalInclLowVat / 100 * customerPercentage, 2);
             double subtotaVatHighAmountlMinPercentage = subTotalInclHighVat - Math.Round(subTotalInclHighVat / 100 * customerPercentage, 2);
             double transactionRowDiscountToale = invoice.TransactionRows.Sum(tr => tr.TransactionRowDiscount); // totaal regels discount
+            double subTotalNoLowVatNoHighVat = Math.Round(subtotalNotVatMintPersentage,2);
             double subTotalExclLowVat = Math.Round(subtotaVatLowAmountlMinPercentage / 1.09, 2);
             double subTotalExclHighVat = Math.Round(subtotaVatHighAmountlMinPercentage / 1.21, 2);
             double totalVatLow = Math.Round(subtotaVatLowAmountlMinPercentage - subTotalExclLowVat, 2);
@@ -111,23 +113,16 @@ namespace Boekhouden.UI
 
             //double prijsTotal = invoice.TransactionRows.Sum(tr => tr.Price); // totaal prijzen
             var orderDateTime = invoice.OrderDateTime;
-            double debit = Math.Round(subTotalExclLowVat + subTotalExclHighVat + totalVatLow + totalVatHigh, 2);
+            double debit = Math.Round(subTotalExclLowVat + subTotalExclHighVat + totalVatLow + totalVatHigh + subTotalNoLowVatNoHighVat, 2);
+
             var resultaat = new FactuurTotaal();
+
             resultaat.GeldOntvangen = new DebetRegel(debit, orderDateTime, 1300, "Geld ontvangen");
             resultaat.OmzetBtwLaag = new CreditRegel(subTotalExclLowVat, orderDateTime, 8210, "Omzet Laag (diensten)");
             resultaat.OmzetBtwHoog = new CreditRegel(subTotalExclHighVat, orderDateTime, 8200, "Omzet Hoog (diensten)");
             resultaat.BtwLaag = new CreditRegel(totalVatLow, orderDateTime, 1670, "Btw Laag");
             resultaat.BtwHoog = new CreditRegel(totalVatHigh, orderDateTime, 1671, "Btw Hoog");
-
-
             return resultaat;
-            //if (debit != invoice.Total)
-            //{
-
-            //}
-
-
-
         }
         public void Output(string inputFile, string outputFile)
         {
@@ -156,7 +151,6 @@ namespace Boekhouden.UI
                         dagTotaal.GeldOntvangen.Datum = totaal.GeldOntvangen.Datum;
                         dagTotaal.GeldOntvangen.Grootboek = totaal.GeldOntvangen.Grootboek;
 
-
                         dagTotaal.OmzetBtwHoog.Credit += totaal.OmzetBtwHoog.Credit;
                         dagTotaal.OmzetBtwHoog.GrootboekRekening = totaal.OmzetBtwHoog.GrootboekRekening;
                         dagTotaal.OmzetBtwHoog.Datum = totaal.OmzetBtwHoog.Datum;
@@ -177,9 +171,9 @@ namespace Boekhouden.UI
                         dagTotaal.BtwLaag.Datum = totaal.BtwLaag.Datum;
                         dagTotaal.BtwLaag.Grootboek = totaal.BtwLaag.Grootboek;
 
-                        UitPrint(dagTotaal);
+                        
                     }
-                
+                    UitPrint(dagTotaal);
                     samenvatting.Add(dagTotaal);
 
                 }
