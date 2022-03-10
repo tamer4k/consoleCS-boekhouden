@@ -16,5 +16,9 @@ namespace Boekhouden.Domains.DTO
             this.Grootboek = grootboek;
 
         }
+        public GrootboekRegel()
+        {
+
+        }
     }
 }

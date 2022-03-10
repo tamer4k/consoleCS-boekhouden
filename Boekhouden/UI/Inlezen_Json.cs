@@ -40,6 +40,7 @@ namespace Boekhouden
             {
                 foreach (var invoice in invoices)
                 {
+                    
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     var table = new ConsoleTable("TableNumber", "SubTotal", "CustomerDiscount", "Total", "OrderDateTime");
                     table.AddRow(invoice.TableNumber, invoice.SubTotal, invoice.CustomerDiscount.DiscountAmount, invoice.Total, invoice.OrderDateTime.ToString("dd/MM/yyyy"));
