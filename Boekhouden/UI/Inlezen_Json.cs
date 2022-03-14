@@ -45,7 +45,7 @@ namespace Boekhouden
                     var table = new ConsoleTable("TableNumber", "SubTotal", "CustomerDiscount", "Total", "OrderDateTime");
                     table.AddRow(invoice.TableNumber, invoice.SubTotal, invoice.CustomerDiscount.DiscountAmount, invoice.Total, invoice.OrderDateTime.ToString("dd/MM/yyyy"));
                     table.Write();
-                    Console.WriteLine();
+                    //Console.WriteLine();
 
                     //Json file uitprinten
 

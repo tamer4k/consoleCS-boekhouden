@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Boekhouden.UI
 {
@@ -17,7 +18,10 @@ namespace Boekhouden.UI
 
         private static void WriteJson(List<DagTotaal> value, string path)
         {
-            var options = new JsonSerializerOptions();
+            var options = new JsonSerializerOptions
+            {
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            };
             options.Converters.Add(new DateTimeConverterUsingDateTimeParse());
             string JSONresult = JsonSerializer.Serialize(value, options);
 
@@ -39,40 +43,63 @@ namespace Boekhouden.UI
                "Grootboek"
                );
 
+
             Console.ForegroundColor = ConsoleColor.Yellow;
+
             table.AddRow(
                 dagTotaal.GeldOntvangen.Debet,
                 dagTotaal.GeldOntvangen.Datum.ToString("d-M-yy"),
                 dagTotaal.GeldOntvangen.GrootboekRekening,
                 dagTotaal.GeldOntvangen.Grootboek
             );
-            table.AddRow(
-                dagTotaal.OmzetBtwLaag.Credit,
-                dagTotaal.OmzetBtwLaag.Datum.ToString("d-M-yy"),
-                dagTotaal.OmzetBtwLaag.GrootboekRekening,
-                dagTotaal.OmzetBtwLaag.Grootboek
-            );
-            table.AddRow(
-                dagTotaal.OmzetBtwHoog.Credit,
-                dagTotaal.OmzetBtwHoog.Datum.ToString("d-M-yy"),
-                dagTotaal.OmzetBtwHoog.GrootboekRekening,
-                dagTotaal.OmzetBtwHoog.Grootboek
-            );
-            table.AddRow(
-                dagTotaal.BtwLaag.Credit,
-                dagTotaal.BtwLaag.Datum.ToString("d-M-yy"),
-                dagTotaal.BtwLaag.GrootboekRekening,
-                dagTotaal.BtwLaag.Grootboek
-            );
-            table.AddRow(
-                dagTotaal.BtwHoog.Credit,
-                dagTotaal.BtwHoog.Datum.ToString("d-M-yy"),
-                dagTotaal.BtwHoog.GrootboekRekening,
-                dagTotaal.BtwHoog.Grootboek
-            );
 
+            if (dagTotaal.OmzetBtwLaag.Credit != 0)
+            {
+                table.AddRow(
+                    dagTotaal.OmzetBtwLaag.Credit,
+                    dagTotaal.OmzetBtwLaag.Datum.ToString("d-M-yy"),
+                    dagTotaal.OmzetBtwLaag.GrootboekRekening,
+                    dagTotaal.OmzetBtwLaag.Grootboek
+                );
+            }
+            if (dagTotaal.OmzetBtwHoog.Credit != 0)
+            {
+                table.AddRow(
+                    dagTotaal.OmzetBtwHoog.Credit,
+                    dagTotaal.OmzetBtwHoog.Datum.ToString("d-M-yy"),
+                    dagTotaal.OmzetBtwHoog.GrootboekRekening,
+                    dagTotaal.OmzetBtwHoog.Grootboek
+                );
+            }
+            if (dagTotaal.BtwLaag.Credit != 0)
+            {
+                table.AddRow(
+                    dagTotaal.BtwLaag.Credit,
+                    dagTotaal.BtwLaag.Datum.ToString("d-M-yy"),
+                    dagTotaal.BtwLaag.GrootboekRekening,
+                    dagTotaal.BtwLaag.Grootboek
+                );
+            }
+            if (dagTotaal.BtwHoog.Credit != 0)
+            {
+                table.AddRow(
+                    dagTotaal.BtwHoog.Credit,
+                    dagTotaal.BtwHoog.Datum.ToString("d-M-yy"),
+                    dagTotaal.BtwHoog.GrootboekRekening,
+                    dagTotaal.BtwHoog.Grootboek
+                );
+            }
+            if (dagTotaal.OmzetGeenBTW.Credit != 0)
+            {
+                table.AddRow(
+                     dagTotaal.OmzetGeenBTW.Credit,
+                     dagTotaal.OmzetGeenBTW.Datum.ToString("d-M-yy"),
+                     dagTotaal.OmzetGeenBTW.GrootboekRekening,
+                     dagTotaal.OmzetGeenBTW.Grootboek
+                 );
+
+            }
             table.Write();
-
         }
 
         private FactuurTotaal Berekenen(Invoice invoice)
@@ -105,7 +132,7 @@ namespace Boekhouden.UI
             double subtotaVatLowAmountlMinPercentage = subTotalInclLowVat - Math.Round(subTotalInclLowVat / 100 * customerPercentage, 2);
             double subtotaVatHighAmountlMinPercentage = subTotalInclHighVat - Math.Round(subTotalInclHighVat / 100 * customerPercentage, 2);
             double transactionRowDiscountToale = invoice.TransactionRows.Sum(tr => tr.TransactionRowDiscount); // totaal regels discount
-            double subTotalNoLowVatNoHighVat = Math.Round(subtotalNotVatMintPersentage,2);
+            double subTotalNoLowVatNoHighVat = Math.Round(subtotalNotVatMintPersentage, 2);
             double subTotalExclLowVat = Math.Round(subtotaVatLowAmountlMinPercentage / 1.09, 2);
             double subTotalExclHighVat = Math.Round(subtotaVatHighAmountlMinPercentage / 1.21, 2);
             double totalVatLow = Math.Round(subtotaVatLowAmountlMinPercentage - subTotalExclLowVat, 2);
@@ -122,6 +149,8 @@ namespace Boekhouden.UI
             resultaat.OmzetBtwHoog = new CreditRegel(subTotalExclHighVat, orderDateTime, 8200, "Omzet Hoog (diensten)");
             resultaat.BtwLaag = new CreditRegel(totalVatLow, orderDateTime, 1670, "Btw Laag");
             resultaat.BtwHoog = new CreditRegel(totalVatHigh, orderDateTime, 1671, "Btw Hoog");
+            resultaat.OmzetGeenBTW = new CreditRegel(subTotalNoLowVatNoHighVat, orderDateTime, 2222, "GeenBTW (diensten)");
+
             return resultaat;
         }
         public void Output(string inputFile, string outputFile)
@@ -136,20 +165,21 @@ namespace Boekhouden.UI
             {
                 var samenvatting = new List<DagTotaal>();
 
-                foreach (IGrouping<DateTime, Invoice> invoicesPerDay in invoices.GroupBy(x => x.OrderDateTime.Date).OrderByDescending(o =>o.Key).ToArray())
+                foreach (IGrouping<DateTime, Invoice> invoicesPerDay in invoices.GroupBy(x => x.OrderDateTime.Date).OrderByDescending(o => o.Key).ToArray())
                 {
-                    
+
                     var dagTotaal = new DagTotaal();
 
                     foreach (var invoice in invoicesPerDay)
                     {
 
-                       var totaal =  Berekenen(invoice);
+                        var totaal = Berekenen(invoice);
 
                         dagTotaal.GeldOntvangen.Debet += totaal.GeldOntvangen.Debet;
                         dagTotaal.GeldOntvangen.GrootboekRekening = totaal.GeldOntvangen.GrootboekRekening;
                         dagTotaal.GeldOntvangen.Datum = totaal.GeldOntvangen.Datum;
                         dagTotaal.GeldOntvangen.Grootboek = totaal.GeldOntvangen.Grootboek;
+
 
                         dagTotaal.OmzetBtwHoog.Credit += totaal.OmzetBtwHoog.Credit;
                         dagTotaal.OmzetBtwHoog.GrootboekRekening = totaal.OmzetBtwHoog.GrootboekRekening;
@@ -171,9 +201,35 @@ namespace Boekhouden.UI
                         dagTotaal.BtwLaag.Datum = totaal.BtwLaag.Datum;
                         dagTotaal.BtwLaag.Grootboek = totaal.BtwLaag.Grootboek;
 
-                        
+                        dagTotaal.OmzetGeenBTW.Credit += totaal.OmzetGeenBTW.Credit;
+                        dagTotaal.OmzetGeenBTW.GrootboekRekening = totaal.OmzetGeenBTW.GrootboekRekening;
+                        dagTotaal.OmzetGeenBTW.Datum = totaal.OmzetGeenBTW.Datum;
+                        dagTotaal.OmzetGeenBTW.Grootboek = totaal.OmzetGeenBTW.Grootboek;
+
                     }
                     UitPrint(dagTotaal);
+
+                    if (dagTotaal.OmzetBtwHoog.Credit == 0)
+                    {
+                        dagTotaal.OmzetBtwHoog = null;
+                    }
+                    if (dagTotaal.OmzetBtwLaag.Credit == 0)
+                    {
+                        dagTotaal.OmzetBtwLaag = null;
+                    }
+                    if (dagTotaal.BtwHoog.Credit == 0)
+                    {
+                        dagTotaal.BtwHoog = null;
+                    }
+                    if (dagTotaal.BtwLaag.Credit == 0)
+                    {
+                        dagTotaal.BtwLaag = null;
+                    }
+                    if (dagTotaal.OmzetGeenBTW.Credit == 0)
+                    {
+                        dagTotaal.OmzetGeenBTW = null;
+                    }
+
                     samenvatting.Add(dagTotaal);
 
                 }

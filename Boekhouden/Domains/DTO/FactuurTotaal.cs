@@ -7,5 +7,7 @@
         public CreditRegel OmzetBtwHoog { get; set; }
         public CreditRegel BtwLaag { get; set; }
         public CreditRegel BtwHoog { get; set; }
+        public CreditRegel OmzetGeenBTW { get; set; }
+
     }
 }
