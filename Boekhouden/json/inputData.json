@@ -50,7 +50,7 @@
     "TransactionRows": [
       {
         "ProductDescription": "Verpakking",
-        "Price": 5.0,
+        "Price": 5,
         "TransactionRowDiscount": 0,
         "VatType": 0,
         "VatAmount": 0.0
@@ -61,22 +61,15 @@
         "TransactionRowDiscount": 0,
         "VatType": 0,
         "VatAmount": 0.0
-      },
-      {
-        "ProductDescription": "Vegan roerei toast",
-        "Price": 5,
-        "TransactionRowDiscount": 0,
-        "VatType": 0,
-        "VatAmount": 0.0
       }
     ],
     "OrderDateTime": "2021-02-07T15:50+00",
-    "TableNumber": "4",
-    "SubTotal": 15,
+    "TableNumber": "36",
+    "SubTotal": 5,
     "CustomerDiscount": {
       "Percentage": 0,
       "DiscountAmount": 0
     },
-    "Total": 15
+    "Total": 10
   }
 ]
