@@ -7,23 +7,23 @@ namespace Boekhouden.test
     public class Tests
     {
 
-        [Test]
-        public void Test1()
-        {
-            // Arrange
-            Inlezen_Json sut = new Inlezen_Json
-            {
-                Gender = 'm',
-                Height = 180
-            };
-            // Act
+        //[Test]
+        //public void Test1()
+        //{
+        //    // Arrange
+        //    Inlezen_Json sut = new Inlezen_Json
+        //    {
+        //        Gender = 'm',
+        //        Height = 180
+        //    };
+        //    // Act
 
-            double actual = sut.InLezen();
-            double expected = 72.5;
-            // Assert
-            Assert.AreEqual(expected, actual);
+        //    double actual = sut.InLezen();
+        //    double expected = 72.5;
+        //    // Assert
+        //    Assert.AreEqual(expected, actual);
 
-        }
+        //}
 
         [Test]
         public void Test2()
