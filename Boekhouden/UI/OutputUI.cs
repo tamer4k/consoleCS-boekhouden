@@ -99,14 +99,18 @@ namespace Boekhouden.UI
                  );
 
             }
+
+            table.Options.EnableCount = false; 
             table.Write();
+            Console.WriteLine();
+
+
         }
 
-        private FactuurTotaal Berekenen(Invoice invoice)
-        {
-            //invoice.Total += invoice.Total;
 
-            // Json file berekenen
+        private static FactuurTotaal Berekenen(Invoice invoice)
+        {
+
             double subTotalNoVat = 0; // vatType 0 btw is 0%
             double subTotalInclLowVat = 0; // vatType 1 btw 9%
             double subTotalInclHighVat = 0; // vatType 2 btw 21%
@@ -150,9 +154,11 @@ namespace Boekhouden.UI
             resultaat.BtwLaag = new CreditRegel(totalVatLow, orderDateTime, 1670, "Btw Laag");
             resultaat.BtwHoog = new CreditRegel(totalVatHigh, orderDateTime, 1671, "Btw Hoog");
             resultaat.OmzetGeenBTW = new CreditRegel(subTotalNoLowVatNoHighVat, orderDateTime, 2222, "GeenBTW (diensten)");
-
             return resultaat;
         }
+
+
+
         public void Output(string inputFile, string outputFile)
         {
             if (!File.Exists(inputFile))
@@ -234,7 +240,13 @@ namespace Boekhouden.UI
 
                 }
                 WriteJson(samenvatting, outputFile);
+
+
+                // ERD
+                // Read me file
             }
         }
     }
+
+
 }

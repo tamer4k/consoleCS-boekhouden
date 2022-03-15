@@ -10,8 +10,24 @@ using System.Text;
 
 namespace Boekhouden
 {
+
     public class Inlezen_Json
     {
+        public double Height { get; set; }
+        public char Gender { get; set; }
+        public double GetIdealBodyWeight()
+        {
+            switch (Gender)
+            {
+                case 'm':
+                    return (Height - 100) - ((Height - 150) / 4);
+                case 'w':
+                    return (Height - 100) - ((Height - 150) / 2);
+                default:
+                    throw new ArgumentException("The gender argument is not valid");
+            }
+        }
+
         private readonly ApplicationDbContext _context;
         public Inlezen_Json()
         {
@@ -45,17 +61,6 @@ namespace Boekhouden
                     var table = new ConsoleTable("TableNumber", "SubTotal", "CustomerDiscount", "Total", "OrderDateTime");
                     table.AddRow(invoice.TableNumber, invoice.SubTotal, invoice.CustomerDiscount.DiscountAmount, invoice.Total, invoice.OrderDateTime.ToString("dd/MM/yyyy"));
                     table.Write();
-                    //Console.WriteLine();
-
-                    //Json file uitprinten
-
-                    //Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    //Console.WriteLine("TableNumber: " + invoice.TableNumber + " ");
-                    //Console.WriteLine("SubTotal: " + invoice.SubTotal);
-                    //Console.WriteLine("CustomerDiscount: " + invoice.CustomerDiscount.DiscountAmount);
-                    //Console.WriteLine("Total: " + invoice.Total);
-                    //Console.WriteLine("OrderDateTime: " + invoice.OrderDateTime.ToString("dd/MM/yyyy"));
-                    //Console.WriteLine("=======================");
 
                     var invoice1 = new Invoice();
                     invoice1.TableNumber = invoice.TableNumber;

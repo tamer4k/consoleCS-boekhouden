@@ -52,7 +52,7 @@
         "ProductDescription": "Verpakking",
         "Price": 5,
         "TransactionRowDiscount": 0,
-        "VatType": 0,
+        "VatType": 1,
         "VatAmount": 0.0
       },
       {
