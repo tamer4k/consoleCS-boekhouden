@@ -20,8 +20,7 @@ namespace Boekhouden
             var outputJson = @"C:\Users\talashraf\OneDrive - SnelStart Software B.V\Bureaublad\C#\Boekhouden\Boekhouden\Json\output.json";
             var outputUI = new OutputUI();
             outputUI.Output(inputJson, outputJson);
-
-
+            
             //var inlezen = new Inlezen_Json();
             //inlezen.InLezen();
 
