@@ -13,20 +13,28 @@ namespace Boekhouden
 
     public class Inlezen_Json
     {
-        public double Height { get; set; }
-        public char Gender { get; set; }
-        public double GetIdealBodyWeight()
+        public char Sort { get; set; }
+        public double Sum1 { get; set; }
+        public double Sum2 { get; set; }
+        public double Calck()
         {
-            switch (Gender)
+            switch (Sort)
             {
-                case 'm':
-                    return (Height - 100) - ((Height - 150) / 4);
-                case 'w':
-                    return (Height - 100) - ((Height - 150) / 2);
+                case '+':
+                    return (Sum1 + Sum2);
+                case '-':
+                    return (Sum1 - Sum2);
                 default:
                     throw new ArgumentException("The gender argument is not valid");
             }
+            //var invoices = RootObject();
+            //foreach (var invoice in invoices)
+            //{
+            //    Total = invoice.Total;
+            //}
         }
+
+
 
         private readonly ApplicationDbContext _context;
         public Inlezen_Json()
@@ -39,35 +47,33 @@ namespace Boekhouden
             if (File.Exists(Json))
             {
                 var transactionRow = JsonConvert.DeserializeObject<List<Invoice>>(File.ReadAllText(Json));
-                //string json = System.Text.Json.JsonSerializer.Serialize(transactionRow.ToArray());
-                //File.WriteAllText(Json, json);
                 return transactionRow;
             }
             else
             {
                 return null;
             }
+    
         }
-
-        public void InLezen()
+        public  void InLezen()
         {
             var invoices = RootObject();
             if (invoices != null)
             {
                 foreach (var invoice in invoices)
                 {
-                    
+                    Console.WriteLine("\n");
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
                     var table = new ConsoleTable("TableNumber", "SubTotal", "CustomerDiscount", "Total", "OrderDateTime");
-                    table.AddRow(invoice.TableNumber, invoice.SubTotal, invoice.CustomerDiscount.DiscountAmount, invoice.Total, invoice.OrderDateTime.ToString("dd/MM/yyyy"));
+                    table.AddRow(invoice.TableNumber, invoice.SubTotal, invoice.CustomerDiscount.DiscountAmount, invoice.Total, invoice.OrderDateTime.ToString("dd/MM/yyyy/HH:mm"));
                     table.Write();
+                    Console.WriteLine("\n");
 
                     var invoice1 = new Invoice();
                     invoice1.TableNumber = invoice.TableNumber;
                     invoice1.SubTotal = invoice.SubTotal;
                     invoice1.Total = invoice.Total;
                     invoice1.CustomerDiscount = invoice.CustomerDiscount;
-                    //string ites = invoice.OrderDateTime.ToString("yyyy/MM/dd");
                     invoice1.OrderDateTime = invoice.OrderDateTime;
                     invoice1.DateCreated = DateTime.Now;
                     invoice1.TransactionRows = new List<TransactionRow>();
@@ -90,6 +96,7 @@ namespace Boekhouden
                     {
                         Console.ForegroundColor = ConsoleColor.Magenta;
                         Console.WriteLine("Wil de gegevens opslaan? (y voor JA) of (n voor NEE)");
+
                         string invoer = Console.ReadLine();
                         try
                         {
@@ -99,6 +106,7 @@ namespace Boekhouden
                                 if (isInvoice1AlreadyExists)
                                 {
                                     Console.ForegroundColor = ConsoleColor.DarkRed;
+                                    Console.WriteLine("\n");
                                     Console.WriteLine("opslaan is niet gelukt :(  invoice bestaat al");
 
                                 }
@@ -107,6 +115,7 @@ namespace Boekhouden
                                     _context.Add(invoice1);
                                     _context.SaveChanges();
                                     Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("\n");
                                     Console.WriteLine("opslaan is gelukt :)");
                                 }
                                 gelukt = true;
@@ -117,12 +126,13 @@ namespace Boekhouden
                             }
                             else
                             {
+                                Console.WriteLine("\n");
                                 Console.WriteLine("Kies JA of NEE");
                             }
                         }
                         catch (Exception)
                         {
-
+                            Console.WriteLine("\n");
                             Console.WriteLine("Kies JA of NEE AUB");
                         }
                     }
