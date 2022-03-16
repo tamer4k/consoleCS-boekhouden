@@ -9,12 +9,13 @@ using System.Text.Json.Serialization;
 
 namespace Boekhouden.UI
 {
-    public class OutputUI
+    public static class OutputUI
     {
         private static List<Invoice> RootObject(string file)
         {
             return File.Exists(file) ? JsonSerializer.Deserialize<List<Invoice>>(File.ReadAllText(file)) : null;
         }
+
 
         private static void WriteJson(List<DagTotaal> value, string path)
         {
@@ -34,7 +35,9 @@ namespace Boekhouden.UI
                 js.WriteLine(JSONresult.ToString());
             }
         }
-        private void UitPrint(DagTotaal dagTotaal)
+
+
+        private static void UitPrint(DagTotaal dagTotaal)
         {
             var table = new ConsoleTable(
                "C&D",
@@ -159,7 +162,7 @@ namespace Boekhouden.UI
 
 
 
-        public void Output(string inputFile, string outputFile)
+        public static void Output(string inputFile, string outputFile)
         {
             if (!File.Exists(inputFile))
             {
@@ -240,12 +243,11 @@ namespace Boekhouden.UI
 
                 }
                 WriteJson(samenvatting, outputFile);
-
-
-                // ERD
-                // Read me file
             }
         }
+
+
+
     }
 
 

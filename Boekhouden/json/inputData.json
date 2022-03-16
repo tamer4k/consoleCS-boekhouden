@@ -37,7 +37,7 @@
         "VatAmount": 0.17
       }
     ],
-    "OrderDateTime": "2021-01-07T15:50+00",
+    "OrderDateTime": "2021-01-07T15:50+01",
     "TableNumber": "36",
     "SubTotal": 16.50,
     "CustomerDiscount": {
@@ -52,7 +52,7 @@
         "ProductDescription": "Verpakking",
         "Price": 5,
         "TransactionRowDiscount": 0,
-        "VatType": 1,
+        "VatType": 0,
         "VatAmount": 0.0
       },
       {
@@ -63,13 +63,39 @@
         "VatAmount": 0.0
       }
     ],
-    "OrderDateTime": "2021-02-07T15:50+00",
-    "TableNumber": "36",
-    "SubTotal": 5,
+    "OrderDateTime": "2021-02-07T15:50+01",
+    "TableNumber": "6",
+    "SubTotal": 10,
     "CustomerDiscount": {
       "Percentage": 0,
       "DiscountAmount": 0
     },
     "Total": 10
+  },
+  {
+    "TransactionRows": [
+      {
+        "ProductDescription": "Verpakking",
+        "Price": 5,
+        "TransactionRowDiscount": 0,
+        "VatType": 0,
+        "VatAmount": 0.0
+      },
+      {
+        "ProductDescription": "Croissant met jam",
+        "Price": 5,
+        "TransactionRowDiscount": 0,
+        "VatType": 0,
+        "VatAmount": 0.0
+      }
+    ],
+    "OrderDateTime": "2021-02-07T15:00+01",
+    "TableNumber": "4",
+    "SubTotal": 10,
+    "CustomerDiscount": {
+      "Percentage": 50,
+      "DiscountAmount": 5
+    },
+    "Total": 5
   }
 ]
