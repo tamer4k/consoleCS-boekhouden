@@ -7,7 +7,7 @@ namespace Boekhouden.test
     public class Tests
     {
 
-        [Test]
+        [TestCase]
         public void Test1()
         {
             // Arrange
@@ -49,9 +49,10 @@ namespace Boekhouden.test
         [Test]
         public void Test3(string inputJson, string outputJson)
         {
+
             // Arrange
-            OutputUI.Output(inputJson, outputJson);
-            
+            Inlezen_Json inlezen_Json= new Inlezen_Json();
+            inlezen_Json.InLezen();
             // Act
 
             double actual = inputJson.Length;
@@ -61,6 +62,6 @@ namespace Boekhouden.test
 
         }
 
-       
+
     }
 }

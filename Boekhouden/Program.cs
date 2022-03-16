@@ -1,8 +1,10 @@
 ﻿using Boekhouden.UI;
 using ConsoleTables;
+using Microsoft.IdentityModel.Protocols;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -16,8 +18,11 @@ namespace Boekhouden
     {
         private static void Main(string[] args)
         {
-            var inputJson = @"C:\Users\talashraf\OneDrive - SnelStart Software B.V\Bureaublad\C#\Boekhouden\Boekhouden\json\inputData.json";
-            var outputJson = @"C:\Users\talashraf\OneDrive - SnelStart Software B.V\Bureaublad\C#\Boekhouden\Boekhouden\Json\output.json";
+            var inputString = ConfigurationManager.AppSettings["inputData"];
+            var outputString = ConfigurationManager.AppSettings["outputData"];
+
+            var inputJson = inputString;
+            var outputJson = outputString;
 
 
             var inlezen = new Inlezen_Json();
