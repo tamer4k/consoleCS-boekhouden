@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Boekhouden
 {
-    internal class TransactionRow
+    public class TransactionRow
     {
         public int ID { get; set; }
         public string ProductDescription { get; set; }

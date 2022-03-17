@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Configuration;
 
 namespace Boekhouden.UI
 {
@@ -162,14 +163,14 @@ namespace Boekhouden.UI
 
 
 
-        public static void Output(string inputFile, string outputFile)
+        public static void Output(string inputJson, string outputFile)
         {
-            if (!File.Exists(inputFile))
+            if (!File.Exists(inputJson))
             {
-                throw new IOException($"Bestand {inputFile} niet gevonden!");
+                throw new IOException($"Bestand {inputJson} niet gevonden!");
             }
 
-            var invoices = RootObject(inputFile);
+            var invoices = RootObject(inputJson);
             if (invoices != null)
             {
                 var samenvatting = new List<DagTotaal>();
