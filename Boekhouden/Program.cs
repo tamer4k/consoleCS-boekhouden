@@ -32,8 +32,6 @@ namespace Boekhouden
 
             OutputUI.Output(inputJson, outputJson); 
 
-            //var outputUI = new OutputUI();
-            //outputUI.Output(inputJson, outputJson);
 
             Console.WriteLine("Press <Enter> to exit... ");
             while (Console.ReadKey().Key != ConsoleKey.Enter)

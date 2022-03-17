@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Boekhouden
 {
-    internal class CustomerDiscount
+    public class CustomerDiscount
     {
         public int ID { get; set; } 
         public int Percentage { get; set; }

@@ -1,66 +1,54 @@
+using Boekhouden.Domains.DTO;
 using Boekhouden.UI;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Boekhouden.test
 {
     public class Tests
     {
+       
+        //private List<Invoice> Calck()
+        //{
+        //    List<Invoice> ListInvoic = new List<Invoice>();
+        //    var invoice1 = new Invoice();
+        //    invoice1.TransactionRows = new List<TransactionRow>
+        //    {
+        //        new TransactionRow
+        //        {
+        //        Price = 16.50,
+        //        VatType = 1,
+        //        },
+        //        new TransactionRow
+        //        {
+        //        Price = 1.0,
+        //        VatType =0,
+        //        }
+        //    };
+        //    invoice1.CustomerDiscount = new CustomerDiscount()
+        //    {
+        //        DiscountAmount = 1.65,
+        //        Percentage = 10
+        //    };
+        //    ListInvoic.Add(invoice1);
 
-        [TestCase]
-        public void Test1()
-        {
-            // Arrange
-            Inlezen_Json result = new Inlezen_Json
-            {
-                Sort = '+',
-                Sum1 = 10,
-                Sum2 = 10
-            };
-            // Act
+        //    return ListInvoic;
+        //}
 
-            double actual = result.Calck();
-            double expected = 20;
-            // Assert
-            Assert.AreEqual(expected, actual);
+        //[TestCase(14.85)]
+        //public void TotalPrijzenBerekenen(double debit)
+        //{
+        //    //Arrange
+        //    var calck = Calck();
 
-        }
+        //    //Act
+        //    var result = Inlezen_Json.(calck);
 
+        //    //Assert
+        //    Assert.AreEqual(result, debit);
+        //}
 
-
-        [Test]
-        public void Test2()
-        {
-            // Arrange
-            Inlezen_Json result = new Inlezen_Json
-            {
-                Sort = '-',
-                Sum1 = 50,
-                Sum2 = 10
-            };
-            // Act
-
-            double actual = result.Calck();
-            double expected = 40;
-            // Assert
-            Assert.AreEqual(expected, actual);
-
-        }
-        [Test]
-        public void Test3(string inputJson, string outputJson)
-        {
-
-            // Arrange
-            Inlezen_Json inlezen_Json= new Inlezen_Json();
-            inlezen_Json.InLezen();
-            // Act
-
-            double actual = inputJson.Length;
-            double expected = 40;
-            // Assert
-            Assert.AreEqual(expected, actual);
-
-        }
 
 
     }
